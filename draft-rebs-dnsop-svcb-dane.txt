@@ -5,12 +5,12 @@
 dnsop                                                      B.M. Schwartz
 Internet-Draft                                                  R. Evans
 Updates: rfc6698 (if approved)                                Google LLC
-Intended status: Informational                           1 December 2021
+Intended status: Standards Track                         1 December 2021
 Expires: 4 June 2022
 
 
                     Using Service Bindings with DANE
-                       draft-rebs-dnsop-svcb-dane
+                   draft-rebs-dnsop-svcb-dane-latest
 
 Abstract
 
@@ -18,6 +18,13 @@ Abstract
    a new method of indirection in the DNS until their interaction is
    specified.  This document specifies the interaction of DANE with the
    Service Binding (SVCB) system.
+
+Discussion Venues
+
+   This note is to be removed before publishing as an RFC.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/bemasc/svcb-dane.
 
 Status of This Memo
 
@@ -143,15 +150,15 @@ Table of Contents
 
 4.  Updating the TLSA protocol prefixes
 
-   Section 3 of [RFC6698] defines the protocol prefix used for
-   constructing TLSA QNAMEs, and says:
+   Section 3 of [RFC6698] defined the protocol prefix used for
+   constructing TLSA QNAMEs, and said:
 
       The transport names defined for this protocol are "tcp", "udp",
       and "sctp".
 
    At that time, there was exactly one TLS-based protocol defined for
-   use with each of these transports.  However, with the introduction of
-   QUIC [RFC9000], there are now multiple TLS-derived protocols that can
+   each of these transports.  However, with the introduction of QUIC
+   [RFC9000], there are now multiple TLS-derived protocols that can
    operate over UDP, even on the same port.  To distinguish the
    availability and configuration of DTLS and QUIC, this draft Updates
    the above sentence as follows:
@@ -173,8 +180,8 @@ Table of Contents
    xyz.provider.com.           A     192.0.2.1
    _443._tcp.xyz.provider.com. TLSA  <provider keys>
 
-   For ease of management, providers may want to alias various endpoints
-   to a single TLSA RRSet:
+   For ease of management, providers may want to alias various TLSA
+   QNAMEs to a single RRSet:
 
    _443._tcp.xyz.provider.com. CNAME dane-central.provider.com.
    dane-central.provider.com.  TLSA  <provider keys>
@@ -190,16 +197,16 @@ Table of Contents
    explicit arrangement with the key holder.
 
    To prevents the above misconfiguration and ensure that TLS keys can
-   be rotated freely,service operators MAY reject TLS connections whose
+   be rotated freely, service operators MAY reject TLS connections whose
    SNI does not correspond to an approved TLSA base domain.
 
    Service Bindings also enable any third party consumer to publish
    fixed SvcParams for the service.  This can cause an outage or service
    degradation if the service makes a backward-incompatible
    configuration change.  Accordingly, zone owners SHOULD NOT publish
-   publish SvcParams for a TargetName that they do not control, and
-   service operators should take caution when making incompatible
-   configuration changes.
+   SvcParams for a TargetName that they do not control, and service
+   operators should take caution when making incompatible configuration
+   changes.
 
 6.  Security Considerations
 

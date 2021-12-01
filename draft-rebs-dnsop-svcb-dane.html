@@ -12,7 +12,7 @@
     " name="description">
 <meta content="xml2rfc 3.11.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
-<meta content="draft-rebs-dnsop-svcb-dane" name="ietf.draft">
+<meta content="draft-rebs-dnsop-svcb-dane-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.11.1
     Python 3.9.7
@@ -1027,7 +1027,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">dnsop</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-rebs-dnsop-svcb-dane</dd>
+<dd class="internet-draft">draft-rebs-dnsop-svcb-dane-latest</dd>
 <dt class="label-updates">Updates:</dt>
 <dd class="updates">
 <a href="https://www.rfc-editor.org/rfc/rfcrfc6698" class="eref">rfc6698</a> (if approved)</dd>
@@ -1036,7 +1036,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <time datetime="2021-12-01" class="published">1 December 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
-<dd class="intended-status">Informational</dd>
+<dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
 <dd class="expires"><time datetime="2022-06-04">4 June 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
@@ -1056,6 +1056,14 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">DNS-Based Authentication of Named Entities (DANE) cannot be used with a new method of indirection in the DNS until their interaction is specified.  This document specifies the interaction of DANE with the Service Binding (SVCB) system.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-discussion-venues">
+<a href="#name-discussion-venues" class="section-name selfRef">Discussion Venues</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">Source for this draft and an issue tracker can be found at
+    <span><a href="https://github.com/bemasc/svcb-dane">https://github.com/bemasc/svcb-dane</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1235,13 +1243,13 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-updating-the-tlsa-protocol-">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-updating-the-tlsa-protocol-" class="section-name selfRef">Updating the TLSA protocol prefixes</a>
       </h2>
-<p id="section-4-1"><span><a href="https://rfc-editor.org/rfc/rfc6698#section-3" class="relref">Section 3</a> of [<a href="#RFC6698" class="xref">RFC6698</a>]</span> defines the protocol prefix used for constructing TLSA QNAMEs, and says:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1"><span><a href="https://rfc-editor.org/rfc/rfc6698#section-3" class="relref">Section 3</a> of [<a href="#RFC6698" class="xref">RFC6698</a>]</span> defined the protocol prefix used for constructing TLSA QNAMEs, and said:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-4-2.1">
           <p id="section-4-2.1.1">The transport names defined for this protocol are "tcp", "udp", and "sctp".<a href="#section-4-2.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-4-3">At that time, there was exactly one TLS-based protocol defined for use with each of these transports.  However, with the introduction of QUIC <span>[<a href="#RFC9000" class="xref">RFC9000</a>]</span>, there are now multiple TLS-derived protocols that can operate over UDP, even on the same port.  To distinguish the availability and configuration of DTLS and QUIC, this draft Updates the above sentence as follows:<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-3">At that time, there was exactly one TLS-based protocol defined for each of these transports.  However, with the introduction of QUIC <span>[<a href="#RFC9000" class="xref">RFC9000</a>]</span>, there are now multiple TLS-derived protocols that can operate over UDP, even on the same port.  To distinguish the availability and configuration of DTLS and QUIC, this draft Updates the above sentence as follows:<a href="#section-4-3" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-4-4.1">
           <p id="section-4-4.1.1">The transport names defined for this protocol are "tcp" (TLS over TCP <span>[<a href="#RFC8446" class="xref">RFC8446</a>]</span>), "udp" (DTLS <span>[<a href="#I-D.draft-ietf-tls-dtls13" class="xref">I-D.draft-ietf-tls-dtls13</a>]</span>), "sctp" (TLS over SCTP <span>[<a href="#RFC3436" class="xref">RFC3436</a>]</span>), and "quic" (QUIC <span>[<a href="#RFC9000" class="xref">RFC9000</a>]</span>).<a href="#section-4-4.1.1" class="pilcrow">¶</a></p>
@@ -1269,7 +1277,7 @@ xyz.provider.com.           A     192.0.2.1
 _443._tcp.xyz.provider.com. TLSA  &lt;provider keys&gt;
 </pre><a href="#section-5.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5.1-3">For ease of management, providers may want to alias various endpoints to a single TLSA RRSet:<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">For ease of management, providers may want to alias various TLSA QNAMEs to a single RRSet:<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.1-4">
 <pre>
 _443._tcp.xyz.provider.com. CNAME dane-central.provider.com.
@@ -1284,8 +1292,8 @@ dane-central.provider.com.  TLSA  &lt;provider keys&gt;
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-accidental-pinning" class="section-name selfRef">Accidental pinning</a>
         </h3>
 <p id="section-5.2-1">When a service is used by third-party consumers, DANE allows the consumer to publish records that make claims about the certificates used by the service.  When the service subsequently rotates its TLS keys, DANE authentication will fail for these consumers, resulting in an outage.  Accordingly, zone owners <span class="bcp14">MUST NOT</span> publish TLSA records for public keys that are not under their control unless they have an explicit arrangement with the key holder.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">To prevents the above misconfiguration and ensure that TLS keys can be rotated freely,service operators <span class="bcp14">MAY</span> reject TLS connections whose SNI does not correspond to an approved TLSA base domain.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3">Service Bindings also enable any third party consumer to publish fixed SvcParams for the service.  This can cause an outage or service degradation if the service makes a backward-incompatible configuration change.  Accordingly, zone owners <span class="bcp14">SHOULD NOT</span> publish publish SvcParams for a TargetName that they do not control, and service operators should take caution when making incompatible configuration changes.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">To prevents the above misconfiguration and ensure that TLS keys can be rotated freely, service operators <span class="bcp14">MAY</span> reject TLS connections whose SNI does not correspond to an approved TLSA base domain.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">Service Bindings also enable any third party consumer to publish fixed SvcParams for the service.  This can cause an outage or service degradation if the service makes a backward-incompatible configuration change.  Accordingly, zone owners <span class="bcp14">SHOULD NOT</span> publish SvcParams for a TargetName that they do not control, and service operators should take caution when making incompatible configuration changes.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
