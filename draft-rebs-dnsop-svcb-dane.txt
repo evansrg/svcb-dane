@@ -5,8 +5,8 @@
 dnsop                                                      B.M. Schwartz
 Internet-Draft                                                  R. Evans
 Updates: rfc6698 (if approved)                                Google LLC
-Intended status: Standards Track                         1 December 2021
-Expires: 4 June 2022
+Intended status: Standards Track                         9 December 2021
+Expires: 12 June 2022
 
 
                     Using Service Bindings with DANE
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 June 2022.
+   This Internet-Draft will expire on 12 June 2022.
 
 Copyright Notice
 
@@ -122,8 +122,9 @@ Table of Contents
       the origin domain.
 
    This draft applies the same logic to SVCB-compatible records.
-   Specifically, if SVCB resolution was entirely secure, then for each
-   connection attempt derived from a SVCB-compatible record,
+   Specifically, if SVCB resolution was entirely secure (including any
+   AliasMode records and/or CNAMEs), then for each connection attempt
+   derived from a SVCB-compatible record,
 
    *  The TLSA base domain MUST be the final SVCB TargetName.
 
@@ -313,7 +314,16 @@ Table of Contents
 
 8.  IANA Considerations
 
-   This document has no IANA actions.
+   IANA is instructed to add the following entry to the "Underscored and
+   Globally Scoped DNS Node Names" registry:
+
+                +=========+============+=================+
+                | RR Type | _NODE NAME | Reference       |
+                +=========+============+=================+
+                | TLSA    | _quic      | (This document) |
+                +---------+------------+-----------------+
+
+                                 Table 1
 
 9.  References
 
